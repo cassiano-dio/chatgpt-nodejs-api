@@ -1,6 +1,6 @@
 const AWS = require('aws-sdk')
 
-const ENDPOINT = 'cxgi078p19.execute-api.us-east-1.amazonaws.com/production/'
+const ENDPOINT = process.env.API_ENDPOINT
 const client = new AWS.ApiGatewayManagementApi({endpoint: ENDPOINT})
 const names = {};
 
@@ -30,9 +30,12 @@ async function runCompletion(message) {
 }
 
 const sendToBot = async (ids, mess) => {
+    
     let res = await runCompletion(mess);
+    
     let message = {publicMessage: `Bot : ${res}`}
     const all = ids.map(i => sendToOne(i, message));
+    
     return Promise.all(all);
 };
 
@@ -58,6 +61,7 @@ exports.handler = async(event) => {
     if(event.requestContext){
         const connectionId = event.requestContext.connectionId;
         const routeKey = event.requestContext.routeKey;
+        
         let body = {};
         try{
             if(event.body){
