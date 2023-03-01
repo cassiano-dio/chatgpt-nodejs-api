@@ -27,3 +27,8 @@
 
 - Baixar a dependência ```wscat``` através do comando ```npm i -g wscat```. 
 - Utilizar o parâmetro ```-g``` para instalar de forma global no sistema operacional, podendo chamá-la de fora do projeto.
+
+### Utilizando o wscat
+
+- ```wscat -c url_de_conexao_do_websocket```
+- Exemplo de chamada ```{"action":"sendPublic", "message":"Hello World!"}```
